@@ -7,13 +7,13 @@ using ExitGames.Client.Photon;
 public class Health : MonoBehaviourPunCallbacks, IPunObservable
 {
     public int health = 100;
-   public int HitPoints = 5;
     [SerializeField] private Image HealthBarImage;
-    int numOfhealth;
-    [SerializeField]
-    Text win_Loose;
+    [SerializeField] GameObject tempObject;
+    [SerializeField] GameObject gameoverscreen;
+    
+
+
    
- 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -26,25 +26,17 @@ public class Health : MonoBehaviourPunCallbacks, IPunObservable
         }
 
     }
-    private void Update()
-    {
-        numOfhealth = FindObjectsOfType<Health>().Length;
-
-        if (numOfhealth == 1 && gameObject.GetComponent<Health>() != null)
-        {
-            win_Loose.text = "Win";
-        }
-
-    }
-
+ 
     public void takeDamage(int Damage)
     {
         if (health <= 0)
         {
-            win_Loose.text = "Loose";
-            gameObject.GetComponent<FirstPersonController>().enabled = false;
-            gameObject.GetComponent<Gun>().enabled = false;
-            gameObject.GetComponent<Health>().enabled = false;
+            if (photonView.IsMine)
+            {
+                Instantiate(gameoverscreen, transform.position, Quaternion.identity);
+            }
+            Instantiate(tempObject, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
         }
         else
         {
