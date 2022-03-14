@@ -107,15 +107,12 @@ public class FirstPersonController : MonoBehaviourPunCallbacks,IPunObservable
     {
         if(stream.IsWriting)
         {
-            stream.SendNext(pitch);
+           
             stream.SendNext(name.text);
 
         }
         else
         {
-            pitch = (float)stream.ReceiveNext();
-            Quaternion rot = Quaternion.Euler(pitch, 0, 0);
-            cameraTransform.localRotation = rot;
             name.text = (string)stream.ReceiveNext();
         }
     }

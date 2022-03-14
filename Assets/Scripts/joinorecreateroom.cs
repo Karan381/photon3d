@@ -4,30 +4,29 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class QuickStartLobbyController : MonoBehaviourPunCallbacks
+public class joinorecreateroom : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
-    [SerializeField]
-    GameObject quickStartButton;
-    [SerializeField]
-    GameObject quickCancelButton;
-    [SerializeField]
-    int RoomSize;
 
-    
+    [SerializeField] GameObject Findagain;
+    [SerializeField] int RoomSize = 2;
+    private void Start()
+    {
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        quickStartButton.SetActive(true);
+        Debug.Log("we are connected to " + PhotonNetwork.CloudRegion + " server!");
+        Findagain.SetActive(true);
     }
-
-    public void QuickStart()
+    public void QuickMatch()
     {
-        
-        quickStartButton.SetActive(false);
-        quickCancelButton.SetActive(true);
-        PhotonNetwork.JoinRandomRoom();
-        Debug.Log("Quick Start");
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.JoinRandomOrCreateRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -35,7 +34,6 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         Debug.Log("Failed To Join Room");
         CreateRoom();
     }
-
     void CreateRoom()
     {
         Debug.Log("Creating Room Now");
@@ -44,6 +42,11 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps);
         Debug.Log(randomRoomNumber);
     }
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined Room");
+        StartGame();
+    }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -51,10 +54,19 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         CreateRoom();
     }
 
-    public void QuickCancel()
+    void StartGame()
     {
-        quickCancelButton.SetActive(false);
-        quickStartButton.SetActive(true);
-        PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("StartinGame");
+            PhotonNetwork.LoadLevel(1);
+        }
     }
+
+    void SetName()
+    {
+        PhotonNetwork.NickName = PlayerPrefs.GetString("NickName"); 
+    }
+    // Update is called once per frame
+   
 }

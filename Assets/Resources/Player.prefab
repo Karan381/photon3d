@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885427817505361996}
-  m_LocalRotation: {x: -0.13052596, y: -0, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 0.453, y: -0.162, z: 4.44}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.453, y: 0.027365446, z: 0.72478294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7075680732084671635}
-  m_Father: {fileID: 7853543454585043880}
-  m_RootOrder: 0
+  m_Father: {fileID: 7853543453528534020}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: 0}
 --- !u!1 &2359246186431118097
 GameObject:
@@ -5327,7 +5327,7 @@ GameObject:
   - component: {fileID: 317845672021521343}
   - component: {fileID: 9069211396691179170}
   - component: {fileID: 721424612876463846}
-  - component: {fileID: 1665193940067978379}
+  - component: {fileID: 8470369689376185446}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5350,6 +5350,7 @@ Transform:
   - {fileID: 7853543454585043880}
   - {fileID: 2155200521685513106}
   - {fileID: 1778032697951738979}
+  - {fileID: 885427817505361997}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5460,9 +5461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   HealthBarImage: {fileID: 7094449742478597016}
-  tempObject: {fileID: 6387700350546256199, guid: 4f2353f110cc546408b3f45556dcdc47, type: 3}
-  gameoverscreen: {fileID: 3473211173543010936, guid: 6c2f01254a5bba140a3ff60f3cdb8893, type: 3}
---- !u!114 &1665193940067978379
+  loosePannel: {fileID: 3473211173543010936, guid: 6c2f01254a5bba140a3ff60f3cdb8893, type: 3}
+--- !u!114 &8470369689376185446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5474,7 +5474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d401c71b456786144baf832927d242f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textF: {fileID: 491308352469034157}
+  winPannel: {fileID: 1396810805180808270, guid: 09786ac3a78a7cf4e8c9a47496f5a62d, type: 3}
 --- !u!1 &7853543454061001060
 GameObject:
   m_ObjectHideFlags: 0
@@ -5584,8 +5584,7 @@ Transform:
   m_LocalRotation: {x: 0.13052596, y: -0, z: -0, w: 0.99144495}
   m_LocalPosition: {x: 0, y: 1.333, z: -3.5219998}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 885427817505361997}
+  m_Children: []
   m_Father: {fileID: 7853543453528534020}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}

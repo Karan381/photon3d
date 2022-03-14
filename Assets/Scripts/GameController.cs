@@ -1,12 +1,15 @@
 using UnityEngine;
 using Photon.Pun;
-
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class GameController : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     public GameObject playerPrefab;
+    [SerializeField]
  
+    
 
     void Start()
     {
@@ -36,12 +39,10 @@ public class GameController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Quit();
         }
-    
-        
     }
 
   
